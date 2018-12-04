@@ -1,3 +1,5 @@
+require 'date'
+
 class Account
 
   def initialize(transactionClass)
@@ -5,12 +7,14 @@ class Account
     @transactionClass = transactionClass
   end
 
-  def deposit(amount, date)
-    @transactions.unshift(@transactionClass.new(amount, nil, date, prev_balance))
+  def deposit(amount, date=Date.today)
+    return unless currency?(amount)
+    add_transaction(amount, nil, date)
   end
 
-  def withdrawal(amount, date)
-    @transactions.unshift(@transactionClass.new(nil, amount, date, prev_balance))
+  def withdrawal(amount, date=Date.today)
+    return unless currency?(amount)
+    add_transaction(nil, amount, date)
   end
 
   def statement
@@ -29,6 +33,14 @@ class Account
   end
 
   private
+
+  def add_transaction(credit, debit, date)
+    @transactions.unshift(@transactionClass.new(credit, debit, date, prev_balance))
+  end
+
+  def currency?(amount)
+    (amount * 100) % 1 === 0
+  end
 
   def transactions
     @transactions.dup
