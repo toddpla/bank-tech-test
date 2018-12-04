@@ -18,7 +18,7 @@ bundle
 rspec
 ```
 coverage 100%
-![test-coverage](https://www.github.com/toddpla/docs/images/test_coverage.png)
+![test-coverage](https://github.com/toddpla/bank-tech-test/blob/master/docs/images/test_coverage.png)
 
 ## example usage
 open using pry or irb
@@ -52,3 +52,5 @@ $ account.statement
 => "date || credit || debit || balance\n04/12/2018 || 20.00 || || 109.50\n04/12/2018 || || 35.50 || 89.50\n04/12/2018 || 12
 5.00 || || 125.00"
 ```
+
+![working-example](https://github.com/toddpla/bank-tech-test/blob/master/docs/images/working_screenshot.png)
