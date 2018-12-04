@@ -6,11 +6,11 @@ class Account
   end
 
   def deposit(amount, date)
-    @transactions << @transactionClass.new(amount, nil, date, prev_balance)
+    @transactions.unshift(@transactionClass.new(amount, nil, date, prev_balance))
   end
 
   def withdrawal(amount, date)
-    @transactions << @transactionClass.new(nil, amount, date, prev_balance)
+    @transactions.unshift(@transactionClass.new(nil, amount, date, prev_balance))
   end
 
   def statement
