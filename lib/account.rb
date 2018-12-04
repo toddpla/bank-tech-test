@@ -6,19 +6,19 @@ class Account
   end
 
   def deposit(amount, date)
-    @transactions << @transactionClass.new(amount, nil, date)
+    @transactions << @transactionClass.new(amount, nil, date, prev_balance)
   end
 
   def withdrawal(amount, date)
-    @transactions << @transactionClass.new(nil, amount, date)
+    @transactions << @transactionClass.new(nil, amount, date, prev_balance)
   end
 
   def statement
-    s = "date || credit || debit || balance\n"
-    transactions.each do |t|
-      s << "#{t.date} || #{t.credit} || #{t.debit} || #{t.balance}"
-    end
-    s
+    "date || credit || debit || balance\n" << (
+      transactions.map do |t|
+        "#{t.date} || #{t.credit} || #{t.debit} || #{t.balance}"
+      end.join("\n")
+    )
   end
 
   def transaction_count
@@ -29,6 +29,10 @@ class Account
 
   def transactions
     @transactions.dup
+  end
+
+  def prev_balance
+    transactions[-1] && transactions[-1].balance
   end
 
 end
