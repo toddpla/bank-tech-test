@@ -1,6 +1,8 @@
-require 'date'
+require 'format'
 
 class Account
+
+  include Format
 
   def initialize(trans_class)
     @ledger = []
@@ -20,10 +22,10 @@ class Account
   def statement
     "date || credit || debit || balance\n" <<
       ledger.map do |t|
-        "#{t.pretty_date} || "\
-        "#{t.credit && "#{t.credit} "}|| "\
-        "#{t.debit && "#{t.debit} "}|| "\
-        "#{t.balance}"
+        "#{pretty_date(t.date)} || "\
+        "#{t.credit && "#{currency(t.credit)} "}|| "\
+        "#{t.debit && "#{currency(t.debit)} "}|| "\
+        "#{currency(t.balance)}"
       end.join("\n")
 
   end
