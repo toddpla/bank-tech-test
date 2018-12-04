@@ -3,9 +3,10 @@ require 'account'
 require 'transaction'
 
 describe 'statement' do
-  it 'prints correctly with showing credits and debits with date and balance' do
+  it 'prints out the statements correctly ignoring invalid input' do
     account = Account.new(Transaction)
     account.deposit(1000.00, Date.new(2012, 01, 10))
+    account.deposit(1.123, Date.new(2012, 01, 10))
     account.deposit(2000.00, Date.new(2012, 01, 13))
     account.withdrawal(500.00, Date.new(2012, 01, 14))
     expect(account.statement).to eq "date || credit || debit || balance\n"\

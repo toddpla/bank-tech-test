@@ -7,9 +7,7 @@ class Transaction
     @balance = prev_balance.to_f + credit.to_f - debit.to_f
   end
 
-  def date
-    @date
-  end
+  attr_reader :date
 
   def pretty_date
     date.strftime("%d/%m/%Y")
