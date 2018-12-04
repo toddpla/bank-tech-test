@@ -1,4 +1,4 @@
-require 'format'
+require_relative 'format'
 
 class Account
 
@@ -12,11 +12,13 @@ class Account
   def deposit(amount, date = Date.today)
     return unless currency?(amount)
     add_transaction(amount, nil, date)
+    last_transaction
   end
 
   def withdrawal(amount, date = Date.today)
     return unless currency?(amount)
     add_transaction(nil, amount, date)
+    last_transaction
   end
 
   def statement
@@ -27,7 +29,6 @@ class Account
         "#{t.debit && "#{currency(t.debit)} "}|| "\
         "#{currency(t.balance)}"
       end.join("\n")
-
   end
 
   def transaction_count
@@ -50,6 +51,10 @@ class Account
 
   def prev_balance
     ledger[0] && ledger[0].balance
+  end
+
+  def last_transaction
+    ledger[0]
   end
 
 end
