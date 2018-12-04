@@ -26,7 +26,7 @@ describe Account do
       transactions = [transaction_1]
       allow(account).to receive(:transactions).and_return(transactions)
       expect(account.statement).to eq "date || credit || debit || balance\n"\
-                                      "2012-01-10 || 100.0 ||  || 100.0"
+                                      "2012-01-10 || 100.0 || || 100.0"
     end
   end
 

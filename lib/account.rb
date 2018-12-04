@@ -16,7 +16,10 @@ class Account
   def statement
     "date || credit || debit || balance\n" << (
       transactions.map do |t|
-        "#{t.pretty_date} || #{t.credit} || #{t.debit} || #{t.balance}"
+        "#{t.pretty_date} || "\
+        "#{t.credit && "#{t.credit} "}|| "\
+        "#{t.debit && "#{t.debit} "}|| "\
+        "#{t.balance}"
       end.join("\n")
     )
   end
