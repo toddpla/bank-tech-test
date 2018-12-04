@@ -22,7 +22,7 @@ describe Account do
 
   describe '#statement' do
     it 'should print the statement of transactions' do
-      transaction_1 = double('transaction_1', credit: 100.00, debit: nil, date: Date.new(2012,01,10), balance: 100.00)
+      transaction_1 = double('transaction_1', credit: 100.00, debit: nil, pretty_date: Date.new(2012,01,10), balance: 100.00)
       transactions = [transaction_1]
       allow(account).to receive(:transactions).and_return(transactions)
       expect(account.statement).to eq "date || credit || debit || balance\n"\

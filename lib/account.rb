@@ -16,7 +16,7 @@ class Account
   def statement
     "date || credit || debit || balance\n" << (
       transactions.map do |t|
-        "#{t.date} || #{t.credit} || #{t.debit} || #{t.balance}"
+        "#{t.pretty_date} || #{t.credit} || #{t.debit} || #{t.balance}"
       end.join("\n")
     )
   end
@@ -32,7 +32,7 @@ class Account
   end
 
   def prev_balance
-    transactions[-1] && transactions[-1].balance
+    transactions[0] && transactions[0].balance
   end
 
 end
