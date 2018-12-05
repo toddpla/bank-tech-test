@@ -1,14 +1,16 @@
-require_relative '../utils/account_helper'
 require_relative '../utils/validation'
 
 class Account
 
-  include AccountHelper
   include Validation
 
-  def initialize(trans_class)
+  attr_accessor :statement
+
+  def initialize(trans_class, statement_class)
     @ledger = []
     @trans_class = trans_class
+    header = "date || credit || debit || balance\n"
+    @statement = statement_class.new(@ledger, header)
   end
 
   def deposit(amount, date = Date.today)

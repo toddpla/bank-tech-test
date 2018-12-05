@@ -4,7 +4,8 @@ require 'date'
 describe Account do
 
   let(:trans_class) { double('trans_class', new: nil) }
-  let(:account) { described_class.new(trans_class) }
+  let(:statement_class) { double('statement_class', new: 'statement_class') }
+  let(:account) { described_class.new(trans_class, statement_class) }
 
   describe '#deposit' do
     it 'should add a credit transaction to the account' do
@@ -22,11 +23,7 @@ describe Account do
 
   describe '#statement' do
     it 'should print the statement of transactions' do
-      transaction_1 = double('transaction_1', credit: 100.00, debit: nil, date: Date.new(2012, 01, 10), balance: 100.00)
-      transactions = [transaction_1]
-      allow(account).to receive(:ledger).and_return(transactions)
-      expect(account.statement).to eq "date || credit || debit || balance\n"\
-                                      "10/01/2012 || 100.00 || || 100.00"
+      expect(account.statement).to eq 'statement_class'
     end
   end
 
