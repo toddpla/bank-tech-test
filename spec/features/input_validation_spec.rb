@@ -1,6 +1,6 @@
 require 'date'
-require 'account'
-require 'transaction'
+require './lib/models/account'
+require './lib/models/transaction'
 
 describe 'statement' do
   it 'prints out the statements correctly ignoring invalid input' do

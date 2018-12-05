@@ -1,4 +1,4 @@
-require 'transaction'
+require './lib/models/account'
 require 'date'
 
 describe Transaction do

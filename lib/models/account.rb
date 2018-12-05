@@ -1,8 +1,8 @@
-require_relative 'format'
+require_relative '../utils/account_helper'
 
 class Account
 
-  include Format
+  include AccountHelper
 
   def initialize(trans_class)
     @ledger = []
@@ -19,16 +19,6 @@ class Account
     return unless currency?(amount)
     add_transaction(nil, amount, date)
     last_transaction
-  end
-
-  def statement
-    "date || credit || debit || balance\n" <<
-      ledger.map do |t|
-        "#{pretty_date(t.date)} || "\
-        "#{t.credit && "#{currency(t.credit)} "}|| "\
-        "#{t.debit && "#{currency(t.debit)} "}|| "\
-        "#{currency(t.balance)}"
-      end.join("\n")
   end
 
   def transaction_count

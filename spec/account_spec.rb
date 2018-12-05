@@ -1,4 +1,4 @@
-require 'account'
+require './lib/models/account'
 require 'date'
 
 describe Account do
