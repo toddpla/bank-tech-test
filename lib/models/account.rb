@@ -1,8 +1,10 @@
 require_relative '../utils/account_helper'
+require_relative '../utils/validation'
 
 class Account
 
   include AccountHelper
+  include Validation
 
   def initialize(trans_class)
     @ledger = []
@@ -31,20 +33,16 @@ class Account
     @ledger.unshift(@trans_class.new(credit, debit, date, prev_balance))
   end
 
-  def currency?(amount)
-    (amount * 100) % 1 === 0
-  end
-
   def ledger
     @ledger.dup
   end
 
-  def prev_balance
-    ledger[0] && ledger[0].balance
-  end
-
   def last_transaction
     ledger[0]
+  end
+
+  def prev_balance
+    last_transaction && last_transaction.balance
   end
 
 end
